@@ -1,1 +1,1 @@
-Basic configs for vim
+Noob escape configs for your babe!
