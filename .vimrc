@@ -1,22 +1,18 @@
-autocmd filetype cpp nnoremap <F5> :w <bar> !g++-4.8 -ulimit -Wall -Wno-unused-result -std=c++11   -O2   % -o %:r && ./%:r <CR>
+"set noncompatible "Always set this as the first line
 
 syntax on
-set tabstop=4
-set shiftwidth=4
-set expandtab
+
+set tabstop=4 "Number of visual spaces per tab
+set shiftwidth=4 "Number of auto-indent spaces
+set expandtab "Use spaces instead of tabs
+set softtabstop=4 "Number of spaces per tab when editing
+
+set list listchars=tab:»·,trail:·,nbsp:·
+
 filetype indent on
-set autoindent
+
 set ai
 set number
-set hlsearch
-hi search ctermbg=black
-hi Search ctermfg=Red
-
-" Set no backup, avoids creating extra files by vim
-set nobackup
-" disable vi compatibility (emulation of old bugs)
-set nocompatible
-
 set ruler
 colorscheme peachpuff
 highlight Comment ctermfg=green
@@ -27,8 +23,9 @@ set fenc=utf-8
 set termencoding=utf-8
 
 "intelligent intent for C
-set smartindent
-set smartcase
+set autoindent "Auto-indent new lines
+set smartindent "Enable smart-indent
+set smarttab "Enable smart-tab
 set textwidth=120
 
 " turn syntax highlighting on
@@ -36,6 +33,22 @@ set t_Co=256
 
 " highlight matching braces
 set showmatch
+
+""No noise when error
+set visualbell
+
+"" Set timeout for escape key
+set timeoutlen=100 ttimeoutlen=100
+
+"" make yank copy to the global system clipboard
+set clipboard=unnamed
+
+""Search
+set hlsearch    " Highlight all search results
+set ignorecase    " Always case-insensitive
+set incsearch    " Searches for strings incrementally
+set smartcase    " Enable smart-case search
+
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 " Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
@@ -46,33 +59,45 @@ set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/sdl
 set tags+=~/.vim/tags/qt4
 
-" c++ indent
-set cindent
-set cinoptions=g0
-retab
-"enable python syntax
-let python_highlight_all = 1
+"" Scrolling
+set scrolloff=10         "Start scrolling when we're n lines away from margins
+set sidescrolloff=15
+set sidescroll=1
 
+set linebreak    " Break lines at word (requires Wrap lines)
+set textwidth=79    " Line wrap (number of cols)
+set backspace=indent,eol,start    " Backspace behaviour
+set cursorline " Highlight current line
+set ruler    " Show row and column ruler information
+set wildmenu
+set nofoldenable
 
-" Auto complete using clang_complete
-" 1. Install libclang-dev
-" 2. Ensure python 2 support is enabled in vim (otherwise build vim with it)
-" 3. Install clang_complete from here https://www.vim.org/scripts/script.php?script_id=3302
-" 4. Install libclang1 in ubuntu or libclang in other distro; ensure libclang.so is available
-let g:clang_user_options="-std=c++0x"
+"" Number of Undos
+set undolevels=700
+"" Command history length
+set history=700
 
-" Enhanced keyboard mappings
-" switch between header/source with F4
-map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-
+" Powerline setting
+"set rtp+=~/Applications/anaconda/lib/python3.5/site-packages/powerline/bindings/vim
+set laststatus=2
+set showtabline=1
+set noshowmode
+set t_Co=256
 
 set background=dark
+
+"" automatically set paste/nopaste
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
 
 autocmd filetype java nnoremap <F5> :w <bar> !javac % && java -enableassertions %:r <CR>
 autocmd filetype python nnoremap <F5> :w <bar> !python % <CR>
 autocmd filetype perl nnoremap <F5> :w <bar> !perl % <CR>
 autocmd filetype go nnoremap <F5> :w <bar> !go build % && ./%:r <CR>
-autocmd FileType c nnoremap <buffer> <S-F8> :update<bar>!gcc -Werror % && ./a.out<CR>
-autocmd FileType c nnoremap <buffer> <S-F9> :update<bar>!gcc -g -Werror % && gdb ./a.out<CR>
-autocmd FileType cpp nnoremap <buffer> <S-F8> :update<bar>!g++ -Werror -std=c++17 % && ./a.out<CR>
-autocmd FileType cpp nnoremap <buffer> <S-F9> :update<bar>!g++ -g -Werror % && gdb ./a.out<CR>
+autocmd filetype cpp nnoremap <F5> :w <bar> !g++-4.8 -ulimit -Wall -Wno-unused-result -      std=c++11   -O2   % -o %:r && ./%:r <CR>
