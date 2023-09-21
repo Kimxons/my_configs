@@ -134,6 +134,7 @@ export CLICOLOR=1
 
 #Customizing the display name in the terminal
 #export PS1="[preferred_name]\[\e[31m\] \[\e[m\]\[\e[31m\]:\[\e[m\]\[\e[31m\]:\[\e[m\] \[\e[32m\]\w\[\e[m\] \[\e[34m\]»\[\e[m\] "
+#export PS1="\u :: \[\e[32m\]\w\[\e[m\] » "
 export PS1="\[\e[0;31m\]╭─\u@\h \[\e[0;36m\]\w\n\[\e[0;31m\]╰─➤ \[\e[0m\]"
 export LSCOLORS=cxgxfxexbxegedabagacad
 
