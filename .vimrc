@@ -16,9 +16,10 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 set ai
-set number
+"set number
 set ruler
-colorscheme peachpuff
+
+"colorscheme evening
 highlight Comment ctermfg=green
 
 "" Theme
@@ -27,6 +28,7 @@ highlight Comment ctermfg=green
 " set UTF-8 encoding
 set enc=utf-8
 set fenc=utf-8
+scriptencoding=utf-8
 set termencoding=utf-8
 
 "intelligent intent for C
